@@ -8,14 +8,17 @@ RUN apt-get update && apt-get install -y \
 
 # Set the working directory in the Docker image
 WORKDIR /app
+ARG DB_HOST
+ARG DB_PORT
+ARG DB_NAME
+ARG DB_USERNAME
+ARG DB_PASSWORD
 
-# Environment variables for database configuration
-ENV DB_HOST=localhost
-ENV DB_PORT=5432
-ENV DB_USER=postgres
-ENV DB_PASSWORD=123
-ENV DB_NAME=sv_79_2021_db
-ENV DB_TABLE=sv_79_2021
+ENV DB_HOST=$DB_HOST
+ENV DB_PORT=$DB_PORT
+ENV DB_NAME=$DB_NAME
+ENV DB_USERNAME=$DB_USERNAME
+ENV DB_PASSWORD=$DB_PASSWORD
 
 # Copy the Maven wrapper executable and POM file
 COPY mvnw .
