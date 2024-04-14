@@ -1,10 +1,15 @@
 # Start with a base image containing Java runtime
 FROM eclipse-temurin:17-jre
 
+# Install necessary OS tools
+RUN apt-get update && apt-get install -y \
+    bash \
+    dos2unix
+
 # Set the working directory in the Docker image
 WORKDIR /app
 
-
+# Environment variables for database configuration
 ENV DB_HOST=localhost
 ENV DB_PORT=5432
 ENV DB_USER=user
@@ -12,20 +17,19 @@ ENV DB_PASSWORD=password
 ENV DB_NAME=mydatabase
 ENV DB_TABLE=mytable
 
-# Copy the Maven executable and POM file
+# Copy the Maven wrapper executable and POM file
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
+
+# Convert line endings and make the script executable
+RUN dos2unix mvnw && chmod +x mvnw
 
 # Optionally download dependencies to improve build layer caching
 RUN ./mvnw dependency:go-offline
 
 # Copy the project source code into the Docker image
 COPY src src
-
-# Package the application
-RUN ./mvnw package -DskipTests
-
 # The final application jar will be named 'app.jar'
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
