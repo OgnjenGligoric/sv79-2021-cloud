@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 @AllArgsConstructor
 @Data
 @Entity
+@Table(name = "sv_79_2021")
 public class Film {
 
     @Id
@@ -18,12 +19,12 @@ public class Film {
     private String title;
     private String genre;
     private Long year;
-    @Transient
-    @Value("${datasource.movie-table-name}")
-    private String tableName;
-
-    @PostLoad
-    public void setTableName() {
-        this.tableName = tableName;
-    }
+//    @Transient
+//    @Value("${datasource.movie-table-name}")
+//    private String tableName;
+//
+//    @PostLoad
+//    public void setTableName() {
+//        this.tableName = tableName;
+//    }
 }
