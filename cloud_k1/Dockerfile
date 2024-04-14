@@ -12,10 +12,10 @@ WORKDIR /app
 # Environment variables for database configuration
 ENV DB_HOST=localhost
 ENV DB_PORT=5432
-ENV DB_USER=user
-ENV DB_PASSWORD=password
-ENV DB_NAME=mydatabase
-ENV DB_TABLE=mytable
+ENV DB_USER=postgres
+ENV DB_PASSWORD=123
+ENV DB_NAME=sv_79_2021_db
+ENV DB_TABLE=sv_79_2021
 
 # Copy the Maven wrapper executable and POM file
 COPY mvnw .
